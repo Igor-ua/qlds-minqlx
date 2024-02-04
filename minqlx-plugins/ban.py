@@ -46,6 +46,9 @@ class ban(minqlx.Plugin):
         self.set_cvar_limit_once("qlx_leaverBanWarnThreshold", "0.78", "0", "1")
         self.set_cvar_once("qlx_leaverBanMinimumGames", "15")
 
+        # Discord related settings
+        self.set_cvar_once("qlx_discordEnableBanLogs", "0")
+
         # List of players playing that could potentially be considered leavers.
         self.players_start = []
         self.pending_warnings = {}
@@ -208,6 +211,15 @@ class ban(minqlx.Plugin):
                 self.kick(ident, "has been banned until ^6{}^7: {}".format(expires, reason))
             except ValueError:
                 channel.reply("^6{} ^7has been banned. Ban expires on ^6{}^7.".format(name, expires))
+                self.trigger_discord_event({
+                    "server": self.get_cvar("sv_hostname"),
+                    "player": player,
+                    "ban_target": name,
+                    "reason": reason,
+                    "issued": now,
+                    "expires": expires,
+                    "term": f'{int(number)} {scale}'
+                })
 
     def cmd_unban(self, player, msg, channel):
         """Unbans a player if banned."""
@@ -399,3 +411,11 @@ class ban(minqlx.Plugin):
     def warn_player(self, player, ratio):
         player.tell("^7You have only completed ^6{}^7 percent of your games.".format(round(ratio * 100, 1)))
         player.tell("^7If you keep leaving you ^6will^7 be banned.")
+
+    def trigger_discord_event(self, ban_info):
+        if self.get_cvar("qlx_discordEnableBanLogs", bool) or False:
+            discord_plugin_name = "mydiscordbot"
+            if discord_plugin_name in minqlx.Plugin._loaded_plugins:
+                discord_bot = minqlx.Plugin._loaded_plugins[discord_plugin_name]
+                if discord_bot.discord.is_discord_logged_in():
+                    discord_bot.discord.discord.dispatch('ban_event', ban_info)
