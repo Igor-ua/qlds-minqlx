@@ -1,0 +1,41 @@
+"AppState"
+{
+	"appid"		"349090"
+	"Universe"		"1"
+	"name"		"Quake Live Dedicated Server"
+	"StateFlags"		"4"
+	"installdir"		"Quake Live Dedicated Server"
+	"LastUpdated"		"1706135015"
+	"SizeOnDisk"		"1041178665"
+	"StagingSize"		"0"
+	"buildid"		"1168250"
+	"LastOwner"		"76561201660832853"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"980820880"
+	"BytesDownloaded"		"980820880"
+	"BytesToStage"		"1041178665"
+	"BytesStaged"		"1041178665"
+	"TargetBuildID"		"1168250"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"1006"
+		{
+			"manifest"		"4884950798805348056"
+			"size"		"73781292"
+		}
+		"349091"
+		{
+			"manifest"		"1763218356016487176"
+			"size"		"967397373"
+		}
+	}
+	"UserConfig"
+	{
+	}
+	"MountedConfig"
+	{
+	}
+}
