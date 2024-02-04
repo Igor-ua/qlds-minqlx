@@ -210,7 +210,7 @@ class ban(minqlx.Plugin):
             try:
                 self.kick(ident, "has been banned until ^6{}^7: {}".format(expires, reason))
             except ValueError:
-                channel.reply("^6{} ^7has been banned. Ban expires on ^6{}^7...".format(name, expires))
+                channel.reply("^6{} ^7has been banned. Ban expires on ^6{}^7.".format(name, expires))
                 self.trigger_discord_event({
                     "server": self.get_cvar("sv_hostname"),
                     "player": player,
