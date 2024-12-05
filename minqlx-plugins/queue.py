@@ -296,10 +296,6 @@ class queue(minqlx.Plugin):
                 self.remove_afk(player)
                 self.add_to_queue(player)
                 return minqlx.RET_STOP_ALL
-        else:
-            self.update_tag(player)
-            self.take_from_queue(0.5)
-            return minqlx.RET_STOP_ALL
 
     def cmd_queue_version(self, player, msg, channel):
         channel.reply('^7This server has installed ^2queue.py {} ^7ver. by ^3Melod^1e^3iro'.format(self.version))
